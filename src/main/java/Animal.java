@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Animal {
     public int id;
     public String name;
@@ -18,5 +20,18 @@ public class Animal {
     }
     public String getType() {
         return type;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return name.equals(animal.name) &&
+                type.equals(animal.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name,type);
     }
 }
