@@ -24,6 +24,9 @@ public class Animal {
     public String getType() {
         return type;
     }
+    public int getId() {
+        return id;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -37,14 +40,36 @@ public class Animal {
     public int hashCode() {
         return Objects.hash(name,type);
     }
+    public void save(){
+        try (Connection con=DB.sql2o.open()){
+            String sql ="INSERT INTO animals (name,type) VALUES (:name,:type)";
+            this.id=(int) con.createQuery(sql,true)
+                    .addParameter("name",this.name)
+                    .addParameter("type",this.type)
+                    .executeUpdate()
+                    .getKey();
+        }
 
+    }
     public static List<Animal> all(){
         try (Connection con=DB.sql2o.open()) {
-            String sql ="SELECT * FROM animal";
+            String sql ="SELECT * FROM animals";
             return con.createQuery(sql)
                     .throwOnMappingFailure(false)
                     .executeAndFetch(Animal.class);
 
         }
+    }
+    public static Animal find(int id){
+        try (Connection con=DB.sql2o.open()){
+            String sql= "SELECT * FROM animals WHERE id=:id";
+            Animal animal=  con.createQuery(sql)
+                    .addParameter("id",id)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetchFirst(Animal.class);
+            return animal;
+
+        }
+
     }
 }
