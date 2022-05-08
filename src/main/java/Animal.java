@@ -1,3 +1,6 @@
+import org.sql2o.Connection;
+
+import java.util.List;
 import java.util.Objects;
 
 public class Animal {
@@ -33,5 +36,15 @@ public class Animal {
     @Override
     public int hashCode() {
         return Objects.hash(name,type);
+    }
+
+    public static List<Animal> all(){
+        try (Connection con=DB.sql2o.open()) {
+            String sql ="SELECT * FROM animal";
+            return con.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Animal.class);
+
+        }
     }
 }
