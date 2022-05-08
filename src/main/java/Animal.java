@@ -1,22 +1,17 @@
 import org.sql2o.Connection;
-
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
-public class Animal {
+public abstract class Animal {
     public int id;
     public String name;
     public String type;
-    private String health;
-    private String age;
-    public static final String ANIMAL_TYPE="normal";
+   public String health;
+   public String age;
+   public Timestamp sighted;
 
 
-
-    public Animal(String name, String type) {
-        this.name = name;
-        this.type = ANIMAL_TYPE;
-    }
 
     public String getName(){
         return name;
@@ -26,6 +21,12 @@ public class Animal {
     }
     public int getId() {
         return id;
+    }
+    public String getAge(){
+        return age;
+    }
+    public Timestamp getSighted(){
+        return sighted;
     }
     @Override
     public boolean equals(Object o) {
@@ -42,34 +43,36 @@ public class Animal {
     }
     public void save(){
         try (Connection con=DB.sql2o.open()){
-            String sql ="INSERT INTO animals (name,type) VALUES (:name,:type)";
+            String sql ="INSERT INTO animals (name, type, health, age, sighted) VALUES (:name, :type, :health, :age, now())";
             this.id=(int) con.createQuery(sql,true)
                     .addParameter("name",this.name)
                     .addParameter("type",this.type)
+                    .addParameter("health",this.health)
+                    .addParameter("age",this.age)
                     .executeUpdate()
                     .getKey();
         }
 
     }
-    public static List<Animal> all(){
-        try (Connection con=DB.sql2o.open()) {
-            String sql ="SELECT * FROM animals";
-            return con.createQuery(sql)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetch(Animal.class);
-
-        }
-    }
-    public static Animal find(int id){
-        try (Connection con=DB.sql2o.open()){
-            String sql= "SELECT * FROM animals WHERE id=:id";
-            Animal animal=  con.createQuery(sql)
-                    .addParameter("id",id)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetchFirst(Animal.class);
-            return animal;
-
-        }
-
-    }
+//    public static List<Animal> all(){
+//        try (Connection con=DB.sql2o.open()) {
+//            String sql ="SELECT * FROM animals";
+//            return con.createQuery(sql)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetch(Animal.class);
+//
+//        }
+//    }
+//    public static Animal find(int id){
+//        try (Connection con=DB.sql2o.open()){
+//            String sql= "SELECT * FROM animals WHERE id=:id";
+//            Animal animal=  con.createQuery(sql)
+//                    .addParameter("id",id)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetchFirst(Animal.class);
+//            return animal;
+//
+//        }
+//
+//    }
 }
