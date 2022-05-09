@@ -15,8 +15,8 @@ class RangersTest {
     @AfterEach
     void tearDown() {
         try(Connection con = DB.sql2o.open()) {
-            String deleteSightingsQuery = "DELETE FROM rangers *;";
-            con.createQuery(deleteSightingsQuery).executeUpdate();
+            String deleteRangersQuery = "DELETE FROM rangers *;";
+            con.createQuery(deleteRangersQuery).executeUpdate();
         }
     }
     @Test
@@ -52,7 +52,7 @@ class RangersTest {
     @Test
     public void all_returnsAllInstancesOfRangers_true() {
         Rangers firstRangers = new Rangers("Mary",2);
-        Rangers secondRangers = new Rangers("Billy",11);
+        Rangers secondRangers = new Rangers("Billy",5);
         try{
             firstRangers.save();
             secondRangers.save();
@@ -67,9 +67,8 @@ class RangersTest {
     public void find_returnsRangersWithSameId_secondRangers() {
         Rangers firstRangers = new Rangers("Mary",2);
         firstRangers.save();
-        Rangers secondRangers = new Rangers("Billy",11);
+        Rangers secondRangers = new Rangers("Billy",5);
         secondRangers.save();
-        assertEquals(Sightings.find(secondRangers.getId()), secondRangers);
+        assertEquals(Rangers.find(secondRangers.getId()), secondRangers);
     }
-}
 }
