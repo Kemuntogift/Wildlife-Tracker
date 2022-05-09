@@ -29,4 +29,47 @@ class RangersTest {
         Rangers testRangers = new Rangers("Mary",2);
         assertEquals(2, testRangers.getBadge_number());
     }
+    @Test
+    public void equals_returnsTrueIfNameAndBadgeNumberAreSame_true() {
+        Rangers testRangers = new Rangers("Mary",2);
+        Rangers anotherRangers = new Rangers("Mary",2);
+        assertTrue(testRangers.equals(anotherRangers));
+    }
+    @Test
+    public void save_returnsTrueIfDescriptionsAreTheSame() {
+        Rangers testRangers = new Rangers("Mary",2);
+        testRangers.save();
+        assertTrue(Rangers.all().get(0).equals(testRangers));
+    }
+    @Test
+    public void save_assignsIdToRangers() {
+        Rangers testRangers = new Rangers("Mary",2);
+        testRangers.save();
+        Rangers savedRangers = Rangers.all().get(0);
+        assertEquals(savedRangers.getId(), testRangers.getId());
+    }
+    //try catch exception thrown during saving
+    @Test
+    public void all_returnsAllInstancesOfRangers_true() {
+        Rangers firstRangers = new Rangers("Mary",2);
+        Rangers secondRangers = new Rangers("Billy",11);
+        try{
+            firstRangers.save();
+            secondRangers.save();
+            assertEquals(true, Rangers.all().get(0).equals(firstRangers));
+            assertEquals(true, Rangers.all().get(1).equals(secondRangers));
+        }catch (IllegalArgumentException exception){
+            System.out.println(exception);
+        }
+    }
+
+    @Test
+    public void find_returnsRangersWithSameId_secondRangers() {
+        Rangers firstRangers = new Rangers("Mary",2);
+        firstRangers.save();
+        Rangers secondRangers = new Rangers("Billy",11);
+        secondRangers.save();
+        assertEquals(Sightings.find(secondRangers.getId()), secondRangers);
+    }
+}
 }
