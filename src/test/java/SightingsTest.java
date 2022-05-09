@@ -53,6 +53,7 @@ class SightingsTest {
         Sightings savedSightings = Sightings.all().get(0);
         assertEquals(savedSightings.getId(), testSightings.getId());
     }
+    //try catch exception thrown during saving
     @Test
     public void all_returnsAllInstancesOfSightings_true() {
         Sightings firstSightings = new Sightings(1, 2, 3);
