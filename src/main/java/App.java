@@ -17,7 +17,10 @@ public class App {
         }, new HandlebarsTemplateEngine());
 
 
-        //get animal from animal-form
-
+        //get animal-form
+        get("/animal-form",(request, response) ->{
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "animal-form.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }
