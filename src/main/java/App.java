@@ -22,5 +22,11 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "animal-form.hbs");
         }, new HandlebarsTemplateEngine());
+
+        //get animal view/animals
+        get("/animal",(request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "animal.hbs");
+        }, new HandlebarsTemplateEngine());
     }
 }
