@@ -31,5 +31,7 @@ public class Sightings {
     public int getAnimal_id() {
         return animal_id;
     }
-
+    public Timestamp getTime() {
+        return time;
+    }
 }

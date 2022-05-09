@@ -34,4 +34,41 @@ class SightingsTest {
         Sightings testSightings = new Sightings(1, 2, 3);
         assertEquals(2, testSightings.getAnimal_id());
     }
+    @Test
+    public void equals_returnsTrueIfLocation_idRanger_idAndAnimal_idAreSame_true() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        Sightings anotherSightings = new Sightings(1, 2, 3);
+        assertTrue(testSightings.equals(anotherSightings));
+    }
+    @Test
+    public void save_returnsTrueIfDescriptionsAreTheSame() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        testSightings.save();
+        assertTrue(Sightings.all().get(0).equals(testSightings));
+    }
+    @Test
+    public void save_assignsIdToSightings() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        testSightings.save();
+        Sightings savedSightings = Sightings.all().get(0);
+        assertEquals(savedSightings.getId(), testSightings.getId());
+    }
+    @Test
+    public void all_returnsAllInstancesOfSightings_true() {
+        Sightings firstSightings = new Sightings(1, 2, 3);
+        firstSightings.save();
+        Sightings secondSightings = new Sightings(4, 2, 3);
+        secondSightings.save();
+        assertEquals(true, Sightings.all().get(0).equals(firstSightings));
+        assertEquals(true, Sightings.all().get(1).equals(secondSightings));
+    }
+    @Test
+    public void find_returnsSightingsWithSameId_secondSightings() {
+        Sightings firstSightings = new Sightings(1, 2, 3);
+        firstSightings.save();
+        Sightings secondSightings = new Sightings(4, 2, 3);
+        secondSightings.save();
+        assertEquals(Sightings.find(secondSightings.getId()), secondSightings);
+    }
+}
 }
