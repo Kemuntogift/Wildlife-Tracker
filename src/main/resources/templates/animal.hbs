@@ -1,0 +1,27 @@
+{{#partial "content"}}
+    <div id="hero" class="card">
+        <img src="/images/hero-left1.jpg" class="img-fluid ">
+        <div class="card-img-overlay   d-flex flex-column align-items-center justify-content-center">
+
+            <div class="views animals">
+                {{#if animals}}
+                    {{#each animals }}
+                        <div class="card animalcard text-white bg-dark mb-3" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{name}}</h5>
+                                <p class="card-text">{{status}}</p>
+                                <p class="card-text">{{health}}</p>
+                                <p class="card-text">{{age}}</p>
+
+                            </div>
+                        </div>
+                    {{/each}}
+                {{else}}
+                    <h2>There are no animals. Add one <a href="/animal/new">here</a></h2>
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout.hbs}}
