@@ -32,7 +32,7 @@ class SightingsTest {
     @Test
     public void Sightings_instantiatesWithAnimalId_Integer() {
         Sightings testSightings = new Sightings(1, 2, 3);
-        assertEquals(2, testSightings.getAnimal_id());
+        assertEquals(3, testSightings.getAnimal_id());
     }
     @Test
     public void equals_returnsTrueIfLocation_idRanger_idAndAnimal_idAreSame_true() {
@@ -56,12 +56,17 @@ class SightingsTest {
     @Test
     public void all_returnsAllInstancesOfSightings_true() {
         Sightings firstSightings = new Sightings(1, 2, 3);
-        firstSightings.save();
         Sightings secondSightings = new Sightings(4, 2, 3);
+        try{
+        firstSightings.save();
         secondSightings.save();
         assertEquals(true, Sightings.all().get(0).equals(firstSightings));
         assertEquals(true, Sightings.all().get(1).equals(secondSightings));
+        }catch (IllegalArgumentException exception){
+            System.out.println(exception);
+        }
     }
+
     @Test
     public void find_returnsSightingsWithSameId_secondSightings() {
         Sightings firstSightings = new Sightings(1, 2, 3);
@@ -70,5 +75,4 @@ class SightingsTest {
         secondSightings.save();
         assertEquals(Sightings.find(secondSightings.getId()), secondSightings);
     }
-}
 }
