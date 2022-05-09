@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -17,5 +18,20 @@ class SightingsTest {
             String deleteSightingsQuery = "DELETE FROM sightings *;";
             con.createQuery(deleteSightingsQuery).executeUpdate();
         }
+    }
+    @Test
+    public void Sightings_instantiatesWithLocationId_Integer() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        assertEquals(1, testSightings.getLocation_id());
+    }
+    @Test
+    public void Sightings_instantiatesWithRangerId_Integer() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        assertEquals(2, testSightings.getRanger_id());
+    }
+    @Test
+    public void Sightings_instantiatesWithAnimalId_Integer() {
+        Sightings testSightings = new Sightings(1, 2, 3);
+        assertEquals(2, testSightings.getAnimal_id());
     }
 }

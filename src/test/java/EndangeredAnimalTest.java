@@ -25,7 +25,7 @@ public class EndangeredAnimalTest {
         assertEquals("Kangaroo", testEndangeredAnimal.getName());
     }
     @Test
-    public void EndangeredAnimal_instantiatesWithType_String() {
+    public void EndangeredAnimal_instantiatesWithAge_String() {
         EndangeredAnimal testEndangeredAnimal = new EndangeredAnimal("Kangaroo", "young");
         assertEquals("young", testEndangeredAnimal.getAge());
     }
