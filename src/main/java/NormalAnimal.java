@@ -63,7 +63,7 @@ public class NormalAnimal extends Animal implements DatabaseManagement {
                     .executeAndFetch(NormalAnimal.class);
             allAnimals.addAll(normalAnimals);
 
-            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered';";
+            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered-animal';";
             List<EndangeredAnimal> endangeredAnimals = connection.createQuery(sqlEndangered)
                     .throwOnMappingFailure(false)
                     .executeAndFetch(EndangeredAnimal.class);
