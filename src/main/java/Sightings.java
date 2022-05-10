@@ -14,8 +14,7 @@ public class Sightings {
     private Timestamp lastSeen;
 
 
-
-    public Sightings(int location_id, int ranger_id, int animal_id) {
+    public Sightings(int animalId, String location, String ranger) {
         this.location = location;
         this.ranger = ranger;
         this.animalId = animalId;
@@ -23,40 +22,39 @@ public class Sightings {
 
     }
 
-public int getId(){
+    public int getId() {
         return id;
-}
-
-    public int getLocation_id() {
-        return location_id;
     }
 
-    public int getRanger_id() {
-        return ranger_id;
+    public int getLocation() {
+        return location;
     }
 
-    public int getAnimal_id() {
-        return animal_id;
+    public int getRanger() {
+        return ranger;
     }
-    public Timestamp getTime() {
-        return time;
+
+    public int getAnimalId() {
+        return animalId;
     }
+
+    public Timestamp getLastSeen() {
+        return lastSeen;
+    }
+
     //method to save sightings
-    public void save(){
+    public void save() {
 
-        if(this.animal_id==-1||this.location_id==-1||this.ranger_id==-1){
+        if (this.animalId == -1 || this.location == "" || this.ranger == "") {
             //throw exception if fields are empty
             throw new IllegalArgumentException("Please fill all form fields");
         }
-        try (Connection con=DB.sql2o.open()){
-            String sql= "INSERT INTO sightings (animal_id,ranger_id,location_id,time) VALUES (:animal_id,:ranger_id," +
-                    ":location_id,:time)";
-
-            this.id=(int) con.createQuery(sql,true)
-                    .addParameter("animal_id",this.animal_id)
-                    .addParameter("ranger_id",this.ranger_id)
-                    .addParameter("location_id",this.location_id)
-                    .addParameter("time",this.time)
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "INSERT INTO sightings (animalId, location, rangerName, lastSeen) VALUES (:animalId, :location, :rangerName, now())";
+            this.id = (int) con.createQuery(sql, true)
+                    .addParameter("animalId", this.animalId)
+                    .addParameter("location", this.location)
+                    .addParameter("rangerName", this.ranger)
                     .executeUpdate()
                     .getKey();
 
@@ -64,38 +62,37 @@ public int getId(){
         }
 
     }
+
     //gets list of all saved
-    public static List<Sightings> all(){
-        try (Connection con =DB.sql2o.open()){
-            String sql=("SELECT * FROM sightings");
+    public static List<Sightings> all() {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = ("SELECT * FROM sightings");
             return con.createQuery(sql)
                     .executeAndFetch(Sightings.class);
 
         }
     }
-//find by id assigned in database
-    public static Sightings find(int id){
-        try (Connection con=DB.sql2o.open()){
-            String sql="SELECT * FROM sightings WHERE id=:id";
+
+    //find by id assigned in database
+    public static Sightings find(int id) {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM sightings WHERE id=:id";
             return con.createQuery(sql)
-                    .addParameter("id",id)
+                    .addParameter("id", id)
                     .executeAndFetchFirst(Sightings.class);
 
         }
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sightings sightings = (Sightings) o;
         return id == sightings.id &&
-                location_id == sightings.location_id &&
-                ranger_id == sightings.ranger_id &&
-                animal_id == sightings.animal_id;
+                location == sightings.location &&
+                ranger == sightings.ranger &&
+                animalId == sightings.animalId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, location_id, ranger_id, animal_id);
-    }
 }
