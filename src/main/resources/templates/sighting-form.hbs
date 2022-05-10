@@ -1,0 +1,20 @@
+{{#partial "content"}}
+    <div id="hero" class="card">
+        <img src="/images/lions2.jpg" class="img-fluid ">
+        <div class="card-img-overlay   d-flex flex-column align-items-center justify-content-center">
+
+            <div class="hero-text form text-center">
+                <form class="form" action="/animal/new" method="post">
+                        <h1>Create Sighting</h1>
+                        <input type="number" placeholder="locationId" name="locationId" required><br>
+
+                        <input type="number" placeholder="rangerId" name="rangerId" required><br>
+                        <input type="number" placeholder="animalId" name="animalId" required><br>
+
+                        <button class="btn btn-primary mx-auto d-block submit" id="submitButton" value="submit" type="submit">submit</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{> layout.hbs}}

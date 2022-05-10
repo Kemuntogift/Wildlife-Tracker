@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class Animal {
+
     public int id;
     public String name;
     public String type;

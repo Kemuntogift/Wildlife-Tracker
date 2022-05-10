@@ -3,29 +3,88 @@
         <img src="/images/lions2.jpg" class="img-fluid ">
         <div class="card-img-overlay   d-flex flex-column align-items-center justify-content-center">
 
-            <div class="hero-text text-center">
+            <div class="hero-text form text-center">
                 <form action="/animal/new" method="post">
-                    <input type="text" id="name" name="name" class="form-control mb-4" placeholder="Animal Name" >
-                    <input list="status-list" type="text" id="status" name="status" class="form-control mb-4" placeholder="Animal Type">
-                    <datalist id="status-list">
-                        <option>Endangered</option>
-                        <option>Normal</option>
-                    </datalist>
-                    <input list="health-list" type="text"  id="health" name="health" class="form-control mb-4" placeholder="Health">
-                    <datalist id="health-list">
-                        <option>Healthy</option>
-                        <option>Okay</option>
-                        <option>Ill</option>
-                    </datalist>
-                    <input list="age-list" type="text" id="age" name="age" class="form-control mb-4" placeholder="Age">
-                    <datalist id="age-list">
-                        <option>NewBorn</option>
-                        <option>Young</option>
-                        <option>Adult</option>
-                    </datalist>
-                    <input type="text" id="sighting" name="sighting" class="form-control mb-4" placeholder="Date sighted e.g 2022-04-26" >
+                    <h1>Create Animal</h1>
+                    <hr>
 
-                    <button class="btn btn-info " type="submit">Submit</button>
+                    {{#if endangered}}
+                        <div class="form-group">
+                            <label for="type">Type</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="normal"
+                                       onClick="window.location = '/create/animal';" >
+                                <label class="form-check-label" for="inlineRadio1">Normal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="endangered"
+                                       onClick="window.location = '/create/animal/endangered';" checked>
+                                <label class="form-check-label" for="inlineRadio2">Endangered</label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Input Name..." required>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="health">Health</label>
+                                </div>
+                                <select class="custom-select" id="health" name="health">
+                                    <option selected>Choose...</option>
+                                    {{#if health }}
+                                        {{#each health as |h|}}
+                                            <option name="health" value={{h}}>{{h}}</option>
+                                        {{/each}}
+
+                                    {{/if}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="age">Age</label>
+                                </div>
+                                <select class="custom-select" id="age" name="age">
+                                    <option selected>Choose...</option>
+                                    {{#if age }}
+                                        {{#each age as |a|}}
+                                            <option name="age" value={{a}}>{{a}}</option>
+                                        {{/each}}
+
+                                    {{/if}}
+                                </select>
+                            </div>
+                        </div>
+                    {{else}}
+                        <div class="form-group">
+                            <label for="type">Type</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="normal"
+                                       onClick="window.location = '/create/animal';" checked>
+                                <label class="form-check-label" for="inlineRadio1">Normal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="endangered"
+                                       onClick="window.location = '/create/animal/endangered';">
+                                <label class="form-check-label" for="inlineRadio2">Endangered</label>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" placeholder="Input Name..." required>
+                        </div>
+
+                    {{/if}}
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-lg"> Create </button>
+                    </div>
+
+
                 </form>
             </div>
         </div>
