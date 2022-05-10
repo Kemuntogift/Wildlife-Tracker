@@ -1,0 +1,55 @@
+header{
+    position: absolute;
+    top: 0px;
+    z-index: 100;
+    width: 100%;
+
+  }
+  .nav-hr{
+    position: absolute;
+    width: 100%;
+    top: 45px;
+  }
+
+  nav{
+    position: absolute;
+    top: 23px;
+    right: 10%;
+  }
+  nav>ul li{
+    display: inline-block;
+    padding: 10px 30px;
+    font-size: 1em;
+    color: white;
+    cursor: pointer;
+  }
+
+.hero-text{
+color: #fdf2b8;
+}
+
+.animalcard{
+margin-bottom:10px
+width:25rem;
+}
+
+.elseh{
+color: #9b4c38}
+
+.form>h1{
+   color: white;
+
+ }
+ .form>input[type=text],
+ .form>input[type=number]{
+   background: none;
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border: none;
+   border-bottom: 1px solid white;
+   color: white;
+   outline: none;
+   display: block;
+
+ }
