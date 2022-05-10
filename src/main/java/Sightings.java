@@ -26,11 +26,11 @@ public class Sightings {
         return id;
     }
 
-    public int getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public int getRanger() {
+    public String getRanger() {
         return ranger;
     }
 
