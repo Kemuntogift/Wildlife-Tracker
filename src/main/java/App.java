@@ -20,7 +20,8 @@ public class App {
 
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-//landing page
+
+        //landing page
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<String, Object>();
             return new ModelAndView(model, "index.hbs");
@@ -33,14 +34,8 @@ public class App {
             return new ModelAndView(model, "animal-form.hbs");
         }, new HandlebarsTemplateEngine());
 
-        //get request....animal view/animals
-        get("/animal",(request, response) -> {
-            Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "animal.hbs");
-        }, new HandlebarsTemplateEngine());
 
-
-
+        //navigate to sighting form
         get("/sighting-form",(request, response) ->{
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "sighting-form.hbs");
@@ -53,36 +48,6 @@ public class App {
             model.put("endangeredAnimals",EndangeredAnimal.all());
             return new ModelAndView(model,"sighting-form.hbs");
         },new HandlebarsTemplateEngine());
-
-//        //follows through post method on form
-//        post("/sighting/new",(request, response) -> {
-//            Map<String,Object> model=new HashMap<String, Object>();
-//            int location_id= Integer.parseInt(request.queryParams("location"));
-//            int ranger_id= Integer.parseInt(request.queryParams("ranger"));
-//            int animal_id= Integer.parseInt(request.queryParams("animal"));
-//
-//            Sightings sighting=new Sightings(location_id,ranger_id,animal_id);
-//            sighting.save();
-//            return new ModelAndView(model,"sighting-form.hbs");
-//        },new HandlebarsTemplateEngine());
-//
-//        //get sightings shown on sighting.hbs
-//        get("/sightings",(request, response) -> {
-//            Map<String,Object> model=new HashMap<String, Object>();
-//            List<Sightings> sightings=Sightings.all();
-//            ArrayList<String> animals=new ArrayList<String>();
-//            ArrayList<String> types=new ArrayList<String>();
-//            for (Sightings sighting : sightings){
-//                String animal_name=EndangeredAnimal.find(sighting.getAnimal_id()).getName();
-//                String animal_type=EndangeredAnimal.find(sighting.getAnimal_id()).getType();
-//                animals.add(animal_name);
-//                types.add(animal_type);
-//            }
-//            model.put("sightings",sightings);
-//            model.put("animals",animals);
-//            model.put("types",types);
-//            return new ModelAndView(model,"sighting.hbs");
-//        },new HandlebarsTemplateEngine());
 
 
     }}

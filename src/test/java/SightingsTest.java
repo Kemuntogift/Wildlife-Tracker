@@ -32,7 +32,7 @@ class SightingsTest {
     @Test
     public void Sightings_instantiatesWithRanger_String() {
         Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
-        assertEquals("Daniel", testSightings.getRanger());
+        assertEquals("Daniel", testSightings.getRangerName());
     }
     @Test
     public void equals_returnsTrueIfLocationRangerAndAnimal_idAreSame_true() {
@@ -76,4 +76,5 @@ class SightingsTest {
         secondSightings.save();
         assertEquals(Sightings.find(secondSightings.getId()), secondSightings);
     }
+
 }

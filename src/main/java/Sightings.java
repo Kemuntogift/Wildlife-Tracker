@@ -8,15 +8,15 @@ import java.util.Objects;
 public class Sightings {
     private int id;
     private int animalId;
-    private String ranger;
+    private String rangerName;
     private String location;
 
     private Timestamp lastSeen;
 
 
-    public Sightings(int animalId, String location, String ranger) {
+    public Sightings(int animalId, String location, String rangerName) {
         this.location = location;
-        this.ranger = ranger;
+        this.rangerName = rangerName;
         this.animalId = animalId;
 
 
@@ -30,8 +30,8 @@ public class Sightings {
         return location;
     }
 
-    public String getRanger() {
-        return ranger;
+    public String getRangerName() {
+        return rangerName;
     }
 
     public int getAnimalId() {
@@ -45,7 +45,7 @@ public class Sightings {
     //method to save sightings
     public void save() {
 
-        if (this.animalId == -1 || this.location == "" || this.ranger == "") {
+        if (this.animalId == -1 || this.location == "" || this.rangerName == "") {
             //throw exception if fields are empty
             throw new IllegalArgumentException("Please fill all form fields");
         }
@@ -54,7 +54,7 @@ public class Sightings {
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("animalId", this.animalId)
                     .addParameter("location", this.location)
-                    .addParameter("rangerName", this.ranger)
+                    .addParameter("rangerName", this.rangerName)
                     .executeUpdate()
                     .getKey();
 
@@ -91,7 +91,7 @@ public class Sightings {
         Sightings sightings = (Sightings) o;
         return id == sightings.id &&
                 location == sightings.location &&
-                ranger == sightings.ranger &&
+                rangerName == sightings.rangerName &&
                 animalId == sightings.animalId;
     }
 

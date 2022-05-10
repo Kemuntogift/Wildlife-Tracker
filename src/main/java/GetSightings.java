@@ -1,9 +1,12 @@
+import org.sql2o.Connection;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 public class GetSightings {
     private int animalId;
     private String location;
-    private String ranger;
+    private String rangerName;
     private Timestamp lastSeen;
     public String name;
     public int id;
@@ -11,13 +14,13 @@ public class GetSightings {
     public String age;
     public String type;
 
-    //join animals and sightings constructors
-    public GetSightings(String name,String health,String age,String location,String ranger,String type,Timestamp lastSeen){
+    //join animals and sightings fields
+    public GetSightings(String name,String health,String age,String location,String rangerName,String type,Timestamp lastSeen){
         this.name = name;
         this.health = health;
         this.age = age;
         this.location = location;
-        this.ranger = ranger;
+        this.rangerName = rangerName;
         this.type = type;
         this.lastSeen = lastSeen;
 
@@ -43,11 +46,19 @@ public class GetSightings {
         return location;
     }
 
-    public String getRanger() {
-        return ranger;
+    public String getRangerName() {
+        return rangerName;
     }
 
     public Timestamp getLastSeen() {
         return lastSeen;
+    }
+
+    //join tables
+    public static List<GetSightings> getAll(){
+        String sql = "SELECT animals.id,name,health,age,location,rangerName,type,lastSeen FROM animals INNER JOIN sightings ON sightings.animalId = animals.id ORDER BY lastSeen";
+        try(Connection con = DB.sql2o.open()) {
+            return con.createQuery(sql).executeAndFetch(GetSightings.class);
+        }
     }
 }
