@@ -9,12 +9,16 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement {
 
 
 
-    public EndangeredAnimal(String name, String age) {
+    public EndangeredAnimal(String name, String health, String age) {
         this.name = name;
         this.age = age;
+        this.health = health;
         type = ANIMAL_TYPE;
+//throw exception if fields are empty
+        if (name.isEmpty() || health.isEmpty() || age.isEmpty()){
+            throw new IllegalArgumentException("Please fill out all fields.");
+        }
     }
-
 
 
 
@@ -38,5 +42,16 @@ public class EndangeredAnimal extends Animal implements DatabaseManagement {
 
         }
 
+    }
+    @Override
+    public boolean equals(Object otherAnimal){
+        if (!(otherAnimal instanceof EndangeredAnimal)) {
+            return false;
+        } else {
+            EndangeredAnimal newAnimal = (EndangeredAnimal) otherAnimal;
+            return this.getName().equals(newAnimal.getName()) &&
+                    this.getHealth().equals(newAnimal.getHealth()) &&
+                    this.getAge().equals(newAnimal.getAge());
+        }
     }
 }

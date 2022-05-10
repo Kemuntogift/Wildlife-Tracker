@@ -25,6 +25,7 @@ public abstract class Animal {
     public String getAge(){
         return age;
     }
+    public String getHealth(){return health;}
 
 //    @Override
 //    public boolean equals(Object o) {
