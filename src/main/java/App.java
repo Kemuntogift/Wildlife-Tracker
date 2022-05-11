@@ -43,7 +43,7 @@ public class App {
 
         get("/sighting", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            model.put("sighting", GetSightings.getAll());
+            model.put("sightings", GetSightings.getAll());
             model.put("animal", EndangeredAnimal.all());
             return new ModelAndView(model, "sighting.hbs");
         }, new HandlebarsTemplateEngine());
@@ -72,7 +72,7 @@ public class App {
 
             List<GetSightings> allSightings = GetSightings.getAll();
             List<EndangeredAnimal> animals= EndangeredAnimal.all();
-            model.put("sighting", allSightings);
+            model.put("sightings", allSightings);
             model.put("animals", animals);
 
             return new ModelAndView(model, "success.hbs");

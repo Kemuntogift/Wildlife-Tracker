@@ -5,6 +5,8 @@ Wildlife Tracker is an app that allows one to record sightings of various animal
 ## Author
 - [Gift Kemunto](https://github.com/Kemuntogift)
 
+## Preview
+  [![screenshot-from-2022-05-11-07-32-47.png](https://i.postimg.cc/gkyhNY36/screenshot-from-2022-05-11-07-32-47.png)](https://postimg.cc/GH29pn7c)
 ## Prerequisites
 
 - Basic Git knowledge, including an installed version of Git.
@@ -19,11 +21,11 @@ Wildlife Tracker is an app that allows one to record sightings of various animal
 ## Setup Requirements for Database
 * In PSQL:
 * CREATE DATABASE wildlife_tracker;
-  \c wildlife_tracker 
-* CREATE TABLE animals (id serial PRIMARY KEY, name varchar,type VARCHAR,health VARCHAR,age VARCHAR,sighted timestamp); 
-* CREATE TABLE sightings (id serial PRIMARY KEY,animal_id INT,ranger_id INT,location_id INT,time TIMESTAMP); 
-* CREATE TABLE rangers (id serial PRIMARY KEY,name VARCHAR,badge_number INT); 
-* CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
+  \c wildlife_tracker
+  CREATE TABLE sightings (id serial PRIMARY KEY, animalid int,location varchar,rangername varchar,lastseen timestamp);
+  CREATE TABLE animals (id serial PRIMARY KEY, name varchar,health varchar,age varchar, type varchar);
+  CREATE TABLE rangers (id serial PRIMARY KEY,name VARCHAR,badge_number INT);
+  CREATE DATABASE wildlife_tracker_test WITH TEMPLATE wildlife_tracker;
 ## In order to run locally
 * Go to DB.class in main/java folder and make necessary changes
 * Go to DatabaseRule in test/java folder and make necessary changes
