@@ -7,6 +7,8 @@ Wildlife Tracker is an app that allows one to record sightings of various animal
 
 ## Preview
   [![screenshot-from-2022-05-11-07-32-47.png](https://i.postimg.cc/gkyhNY36/screenshot-from-2022-05-11-07-32-47.png)](https://postimg.cc/GH29pn7c)
+  [![Screenshot-from-2022-05-12-23-02-48.png](https://i.postimg.cc/SRw750Wv/Screenshot-from-2022-05-12-23-02-48.png)](https://postimg.cc/kRvb6pYQ)
+  [![Screenshot-from-2022-05-12-23-14-40-1.png](https://i.postimg.cc/kGBPsScy/Screenshot-from-2022-05-12-23-14-40-1.png)](https://postimg.cc/305qJdzy)
 ## Prerequisites
 
 - Basic Git knowledge, including an installed version of Git.
