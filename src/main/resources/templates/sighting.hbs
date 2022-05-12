@@ -4,27 +4,21 @@
         <div class="card-img-overlay   d-flex flex-column align-items-center justify-content-center">
 
             <div class="views animals">
-                {{#if animals}}
-                    {{#each animals }}
+
+                    {{#each allSights }}
                         <div class="card animalcard text-white bg-dark mb-3" style="width: 18rem;">
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Animal: </strong>{{name}}</li>
+                                    <li class="list-group-item"><strong>Animal Name:: </strong>{{animalName}}</li>
                                     <li class="list-group-item"><strong>Spotted By:: </strong>{{rangerName}}</li>
                                     <li class="list-group-item"><strong>Location: </strong>{{location}}</li>
-                                    <li class="list-group-item"><strong>Health: </strong>{{health}} Normal</li>
-                                    <li class="list-group-item"><strong>Type: </strong>{{type}}</li>
                                     <li class="list-group-item"><strong>Posted At: </strong>{{lastSeen}}</li>
                                 </ul>
 
                             </div>
                         </div>
                     {{/each}}
-                {{else}}
-                    <div class="elseh">
-                        <h1>There are no animals. Add one <a href="/sighting-form">here</a></h1>
-                    </div>
-                {{/if}}
+
 
             </div>
         </div>

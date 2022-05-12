@@ -21,7 +21,7 @@ public class NormalAnimal extends Animal implements DatabaseManagement {
     }
 
 
-    public static List<NormalAnimal> all(){
+    public static List<NormalAnimal> normalAll(){
         try (Connection con=DB.sql2o.open()) {
             String sql ="SELECT * FROM animals WHERE type='normal';";
             return con.createQuery(sql)
@@ -53,23 +53,23 @@ public class NormalAnimal extends Animal implements DatabaseManagement {
         }
     }
 
-    public static List<Object> getAnimals() {
-        List<Object> allAnimals = new ArrayList<Object>();
-
-        try(Connection connection = DB.sql2o.open()) {
-            String sqlNormal = "SELECT * FROM animals WHERE id=:id AND type='normal';";
-            List<NormalAnimal> normalAnimals = connection.createQuery(sqlNormal)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetch(NormalAnimal.class);
-            allAnimals.addAll(normalAnimals);
-
-            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered-animal';";
-            List<EndangeredAnimal> endangeredAnimals = connection.createQuery(sqlEndangered)
-                    .throwOnMappingFailure(false)
-                    .executeAndFetch(EndangeredAnimal.class);
-            allAnimals.addAll(endangeredAnimals);
-        }
-
-        return allAnimals;
-    }
+//    public static List<Object> getAnimals() {
+//        List<Object> allAnimals = new ArrayList<Object>();
+//
+//        try(Connection connection = DB.sql2o.open()) {
+//            String sqlNormal = "SELECT * FROM animals WHERE id=:id AND type='normal';";
+//            List<NormalAnimal> normalAnimals = connection.createQuery(sqlNormal)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetch(NormalAnimal.class);
+//            allAnimals.addAll(normalAnimals);
+//
+//            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered-animal';";
+//            List<EndangeredAnimal> endangeredAnimals = connection.createQuery(sqlEndangered)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetch(EndangeredAnimal.class);
+//            allAnimals.addAll(endangeredAnimals);
+//        }
+//
+//        return allAnimals;
+//    }
 }

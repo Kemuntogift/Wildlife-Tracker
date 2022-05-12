@@ -1,6 +1,7 @@
 import org.sql2o.Connection;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -8,22 +9,32 @@ import java.util.Objects;
 public class Sightings {
     private int id;
     private int animalId;
+    private String animalName;
     private String rangerName;
     private String location;
 
     private Timestamp lastSeen;
 
 
-    public Sightings(int animalId, String location, String rangerName) {
+    public Sightings(String animal, String location, String rangerName) {
+        this.animalName = animal;
         this.location = location;
         this.rangerName = rangerName;
-        this.animalId = animalId;
+
 
 
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getAnimalName() {
+        return animalName;
+    }
+
+    public void setAnimalName(String animalName) {
+        this.animalName = animalName;
     }
 
     public String getLocation() {
@@ -45,14 +56,14 @@ public class Sightings {
     //method to save sightings
     public void save() {
 
-        if (this.animalId == -1 || this.location == "" || this.rangerName == "") {
+        if (this.animalName == "" || this.location == "" || this.rangerName == "") {
             //throw exception if fields are empty
             throw new IllegalArgumentException("Please fill all form fields");
         }
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO sightings (animalId, location, rangerName, lastSeen) VALUES (:animalId, :location, :rangerName, now())";
+            String sql = "INSERT INTO sightings (animalName, location, rangerName, lastSeen) VALUES (:animalName, :location, :rangerName, now())";
             this.id = (int) con.createQuery(sql, true)
-                    .addParameter("animalId", this.animalId)
+                    .addParameter("animalName", this.animalName)
                     .addParameter("location", this.location)
                     .addParameter("rangerName", this.rangerName)
                     .executeUpdate()
@@ -64,7 +75,7 @@ public class Sightings {
     }
 
     //gets list of all saved
-    public static List<Sightings> all() {
+    public static List<Sightings> sightingsAll() {
         try (Connection con = DB.sql2o.open()) {
             String sql = ("SELECT * FROM sightings");
             return con.createQuery(sql)
@@ -94,5 +105,23 @@ public class Sightings {
                 rangerName == sightings.rangerName &&
                 animalId == sightings.animalId;
     }
+    public static List<Object> getAnimals() {
+        List<Object> allAnimals = new ArrayList<Object>();
 
+        try(Connection connection = DB.sql2o.open()) {
+            String sqlNormal = "SELECT * FROM animals WHERE id=:id AND type='normal';";
+            List<NormalAnimal> normalAnimals = connection.createQuery(sqlNormal)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(NormalAnimal.class);
+            allAnimals.addAll(normalAnimals);
+
+            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered-animal';";
+            List<EndangeredAnimal> endangeredAnimals = connection.createQuery(sqlEndangered)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(EndangeredAnimal.class);
+            allAnimals.addAll(endangeredAnimals);
+        }
+
+        return allAnimals;
+    }
 }

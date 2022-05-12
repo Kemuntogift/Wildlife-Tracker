@@ -1,4 +1,6 @@
 import org.sql2o.Connection;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -53,15 +55,34 @@ public abstract class Animal {
         }
 
     }
-//    public static List<Animal> all(){
-//        try (Connection con=DB.sql2o.open()) {
-//            String sql ="SELECT * FROM animals";
-//            return con.createQuery(sql)
-//                    .throwOnMappingFailure(false)
-//                    .executeAndFetch(Animal.class);
+//    public static List<Object> getAnimals() {
+//        List<Object> allAnimals = new ArrayList<Object>();
 //
+//        try(Connection connection = DB.sql2o.open()) {
+//            String sqlNormal = "SELECT * FROM animals WHERE id=:id AND type='normal';";
+//            List<NormalAnimal> normalAnimals = connection.createQuery(sqlNormal)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetch(NormalAnimal.class);
+//            allAnimals.addAll(normalAnimals);
+//
+//            String sqlEndangered = "SELECT * FROM animals WHERE id=:id AND type='endangered-animal';";
+//            List<EndangeredAnimal> endangeredAnimals = connection.createQuery(sqlEndangered)
+//                    .throwOnMappingFailure(false)
+//                    .executeAndFetch(EndangeredAnimal.class);
+//            allAnimals.addAll(endangeredAnimals);
 //        }
+//
+//        return allAnimals;
 //    }
+    public static List<Animal> all(){
+        try (Connection con=DB.sql2o.open()) {
+            String sql ="SELECT * FROM animals";
+            return con.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Animal.class);
+
+        }
+    }
 //    public static Animal find(int id){
 //        try (Connection con=DB.sql2o.open()){
 //            String sql= "SELECT * FROM animals WHERE id=:id";
