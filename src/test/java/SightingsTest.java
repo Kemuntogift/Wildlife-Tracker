@@ -20,49 +20,49 @@
 //        }
 //    }
 //    @Test
-//    public void Sightings_instantiatesWithAnimalId_Integer() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
-//        assertEquals(1, testSightings.getAnimalId());
+//    public void Sightings_instantiatesWithAnimalName_String() {
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
+//        assertEquals("Lion", testSightings.getAnimalName());
 //    }
 //    @Test
 //    public void Sightings_instantiatesWithLocation_String() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        assertEquals("Nairobi", testSightings.getLocation());
 //    }
 //    @Test
 //    public void Sightings_instantiatesWithRanger_String() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        assertEquals("Daniel", testSightings.getRangerName());
 //    }
 //    @Test
 //    public void equals_returnsTrueIfLocationRangerAndAnimal_idAreSame_true() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
-//        Sightings anotherSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
+//        Sightings anotherSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        assertTrue(testSightings.equals(anotherSightings));
 //    }
 //    @Test
 //    public void save_returnsTrueIfDescriptionsAreTheSame() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        testSightings.save();
-//        assertTrue(Sightings.all().get(0).equals(testSightings));
+//        assertTrue(Sightings.sightingsAll().get(0).equals(testSightings));
 //    }
 //    @Test
 //    public void save_assignsIdToSightings() {
-//        Sightings testSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings testSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        testSightings.save();
-//        Sightings savedSightings = Sightings.all().get(0);
+//        Sightings savedSightings = Sightings.sightingsAll().get(0);
 //        assertEquals(savedSightings.getId(), testSightings.getId());
 //    }
 //    //try catch exception thrown during saving
 //    @Test
 //    public void all_returnsAllInstancesOfSightings_true() {
-//        Sightings firstSightings = new Sightings(1, "Nairobi", "Daniel");
-//        Sightings secondSightings = new Sightings(5, "Donholm", "Beryl");
+//        Sightings firstSightings = new Sightings("Lion", "Nairobi", "Daniel");
+//        Sightings secondSightings = new Sightings("Panda", "Donholm", "Beryl");
 //        try{
 //        firstSightings.save();
 //        secondSightings.save();
-//        assertEquals(true, Sightings.all().get(0).equals(firstSightings));
-//        assertEquals(true, Sightings.all().get(1).equals(secondSightings));
+//        assertEquals(true, Sightings.sightingsAll().get(0).equals(firstSightings));
+//        assertEquals(true, Sightings.sightingsAll().get(1).equals(secondSightings));
 //        }catch (IllegalArgumentException exception){
 //            System.out.println(exception);
 //        }
@@ -70,9 +70,9 @@
 //
 //    @Test
 //    public void find_returnsSightingsWithSameId_secondSightings() {
-//        Sightings firstSightings = new Sightings(1, "Nairobi", "Daniel");
+//        Sightings firstSightings = new Sightings("Lion", "Nairobi", "Daniel");
 //        firstSightings.save();
-//        Sightings secondSightings = new Sightings(5, "Donholm", "Beryl");
+//        Sightings secondSightings = new Sightings("Panda", "Donholm", "Beryl");
 //        secondSightings.save();
 //        assertEquals(Sightings.find(secondSightings.getId()), secondSightings);
 //    }

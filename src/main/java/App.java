@@ -64,17 +64,7 @@ public class App {
             endangeredAnimal.save();
             Sightings newSighting = new Sightings(animalName,location,rangerName);
             newSighting.save();
-//            if(type.equals("normal")){
-//                NormalAnimal animal = new NormalAnimal(animalName,age);
-//                animal.save();
-//                Sightings newSighting = new Sightings(animal.getId(),location,rangerName);
-//                newSighting.save();
-//            } else if(type.equals("endangered")){
-//                EndangeredAnimal endangeredAnimal = new EndangeredAnimal(animalName,health,age);
-//                endangeredAnimal.save();
-//                Sightings anotherSighting = new Sightings(endangeredAnimal.getId(), location, rangerName);
-//                anotherSighting.save();
-//            }
+
 
             List<Sightings> allSightings = Sightings.sightingsAll();
             List<EndangeredAnimal> animals= EndangeredAnimal.endangeredAll();
